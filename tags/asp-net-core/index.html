@@ -169,6 +169,68 @@ var _hmt = _hmt || [];
 <div class="card">
     
     <div class="card-image">
+        <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="image is-7by1">
+            <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 读完 (大约 2628 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                
+                <a class="has-link-black-ter" href="/2021/01/31/use-cookie-authentication-in-asp-net-core/">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>身份认证是网站最基本的功能，最近因为业务部门的一个需求，需要对一个已经存在很久的小工具网站进行改造，因为在逐步的将一些离散的系统迁移至 .NET Core，所以趁这个机会将这个老的 .NET Framework 4.0 的项目进行升级</p>
+<p>老的项目是一个 MVC 的项目并且有外网访问的需求，大部门的微服务平台因为和内部的业务执行比较密切，介于资安要求与外网进行了隔离，因此本次升级就不会迁移到该平台上进行前后端分离改造</p>
+<p>使用频次不高，不存在高并发，实现周期短，所以就没有必要为了用某些组件而用，因此这里还是选择沿用 MVC 框架，对于网站的身份认证则采用单体应用最常见的 Cookie 认证来实现，本篇文章则是如何实现的一个基础的教程，仅供参考</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2021/01/31/use-cookie-authentication-in-asp-net-core/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/" class="image is-7by1">
             <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png" alt="如何在 asp.net core 的中间件中返回具体的页面">
         </a>
@@ -709,66 +771,6 @@ var _hmt = _hmt || [];
 
 
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/02/24/ASP-NET-Core-on-Linux-05/" class="image is-7by1">
-            <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail4.png" alt="ASP.NET Core 实战：基于 Dapper 扩展你的数据访问方法">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-02-24T02:11:37.000Z">2019-02-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/learning/">learning</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    28 分钟 读完 (大约 4176 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                
-                <a class="has-link-black-ter" href="/2019/02/24/ASP-NET-Core-on-Linux-05/">ASP.NET Core 实战：基于 Dapper 扩展你的数据访问方法</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在非静态页面的项目开发中，必定会涉及到对于数据库的访问，最开始呢，我们使用 Ado.Net，通过编写 SQL 帮助类帮我们实现对于数据库的快速访问，后来，ORM（Object Relational Mapping，对象关系映射）出现了，我们开始使用 EF、Dapper、NHibernate，亦或是国人的 SqlSugar 代替我们原来的 SqlHelper.cs。通过这些 ORM 工具，我们可以很快速的将数据库中的表与代码中的类进行映射，同时，通过编写 SQL 或是 Lambda 表达式的方式，更加便捷的实现对于数据层的访问。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;就像文章标题中所说的这样，在这个项目中我是使用的 Dapper 来进行的数据访问，每个人都有自己的编程习惯，本篇文章只是介绍我在 Grapefruit.VuCore 这个项目中是如何基于 Dapper 创建自己使用的帮助方法的，不会涉及各种 ORM 工具的对比，请友善查看、讨论。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系列目录地址：<a href="/2018/08/15/ASP-NET-Core-on-Linux-Overview/" title="ASP.NET Core 项目实战">ASP.NET Core 项目实战</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仓储地址：<a href="https://github.com/Lanesra712/Grapefruit.VuCore" title="https://github.com/Lanesra712/Grapefruit.VuCore" target="_blank" rel="noopener">https://github.com/Lanesra712/Grapefruit.VuCore</a></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/02/24/ASP-NET-Core-on-Linux-05/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -833,7 +835,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            55
+                            56
                         </p>
                     </a>
                 </div>
@@ -933,7 +935,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/asp-net-core/">
                         <span class="tag">asp-net-core</span>
-                        <span class="tag is-grey">19</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -1050,6 +1052,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time></div>
+                    <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail4.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置">
@@ -1124,25 +1145,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/19/deploy-angular-app-to-github-pages-with-github-actions/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="使用 Github Actions 自动部署 Angular 应用到 Github Pages">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-19T02:56:29.000Z">2020-07-19</time></div>
-                    <a href="/2020/07/19/deploy-angular-app-to-github-pages-with-github-actions/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Github Actions 自动部署 Angular 应用到 Github Pages</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1184,7 +1186,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">skills</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li>
             </ul>
@@ -1199,6 +1201,17 @@ var _hmt = _hmt || [];
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/10/">
@@ -1477,6 +1490,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time></div>
+                    <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail4.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置">
@@ -1551,25 +1583,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/19/deploy-angular-app-to-github-pages-with-github-actions/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="使用 Github Actions 自动部署 Angular 应用到 Github Pages">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-19T02:56:29.000Z">2020-07-19</time></div>
-                    <a href="/2020/07/19/deploy-angular-app-to-github-pages-with-github-actions/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Github Actions 自动部署 Angular 应用到 Github Pages</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1611,7 +1624,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">skills</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li>
             </ul>
@@ -1626,6 +1639,17 @@ var _hmt = _hmt || [];
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/10/">
@@ -1901,7 +1925,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2018 - 2020 <br/>
+                &copy; 2018 - 2021 <br/>
                 Powered by <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
                         墨墨墨墨小宇
                         <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>

@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://yuiter.com/2021/01/31/use-cookie-authentication-in-asp-net-core/</loc>
+    <lastmod>2021-01-31T08:50:37.241Z</lastmod>
+    <data>
+        <display>
+        <title>在 ASP.NET Core 应用中使用 Cookie 进行身份认证</title>
+        <pubTime>2021-01-31T08:17:46.000Z</pubTime>
+        
+        <tag>asp-net-core</tag>
+         
+         
+           
+             
+              <breadCrumb title="skills" url="https://yuiter.com/categories/skills/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yuiter.com/2018/07/12/Hello-World/</loc>
-    <lastmod>2020-12-02T12:53:01.667Z</lastmod>
+    <lastmod>2020-12-21T11:58:01.380Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>
@@ -27,26 +47,6 @@
     
     
   <url>
-    <loc>https://yuiter.com/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/</loc>
-    <lastmod>2020-11-21T06:37:40.043Z</lastmod>
-    <data>
-        <display>
-        <title>从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins & SonarQube 安装配置</title>
-        <pubTime>2020-10-17T02:48:49.000Z</pubTime>
-        
-        <tag>devops</tag>
-         
-         
-           
-             
-              <breadCrumb title="skills" url="https://yuiter.com/categories/skills/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yuiter.com/2020/01/31/my-ddd-thought-application-sample-domain-ah-domain/</loc>
     <lastmod>2020-11-21T06:37:40.043Z</lastmod>
     <data>
@@ -60,6 +60,26 @@
            
              
               <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yuiter.com/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/</loc>
+    <lastmod>2020-11-21T06:37:40.043Z</lastmod>
+    <data>
+        <display>
+        <title>从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins & SonarQube 安装配置</title>
+        <pubTime>2020-10-17T02:48:49.000Z</pubTime>
+        
+        <tag>devops</tag>
+         
+         
+           
+             
+              <breadCrumb title="skills" url="https://yuiter.com/categories/skills/"/>
           
         </display>
     </data>
@@ -107,26 +127,6 @@
 
     
   <url>
-    <loc>https://yuiter.com/2020/06/27/how-to-get-the-injected-services-in-startup-of-asp-net-core-3-x/</loc>
-    <lastmod>2020-11-21T06:37:40.042Z</lastmod>
-    <data>
-        <display>
-        <title>如何在 asp.net core 3.x 的 startup.cs 文件中获取注入的服务</title>
-        <pubTime>2020-06-27T02:25:45.000Z</pubTime>
-        
-        <tag>asp-net-core</tag>
-         
-         
-           
-             
-              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yuiter.com/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/</loc>
     <lastmod>2020-11-21T06:37:40.042Z</lastmod>
     <data>
@@ -162,6 +162,26 @@
            
              
               <breadCrumb title="skills" url="https://yuiter.com/categories/skills/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yuiter.com/2020/06/27/how-to-get-the-injected-services-in-startup-of-asp-net-core-3-x/</loc>
+    <lastmod>2020-11-21T06:37:40.042Z</lastmod>
+    <data>
+        <display>
+        <title>如何在 asp.net core 3.x 的 startup.cs 文件中获取注入的服务</title>
+        <pubTime>2020-06-27T02:25:45.000Z</pubTime>
+        
+        <tag>asp-net-core</tag>
+         
+         
+           
+             
+              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
           
         </display>
     </data>
@@ -249,26 +269,6 @@
 
     
   <url>
-    <loc>https://yuiter.com/2019/11/19/get-started-with-mediatr-in-asp-net-core/</loc>
-    <lastmod>2020-11-21T06:37:40.040Z</lastmod>
-    <data>
-        <display>
-        <title>在 ASP.NET Core 项目中使用 MediatR 实现中介者模式</title>
-        <pubTime>2019-11-19T13:52:41.000Z</pubTime>
-        
-        <tag>asp-net-core</tag>
-         
-         
-           
-             
-              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yuiter.com/2020/06/02/getting-started-with-angular-route-guards/</loc>
     <lastmod>2020-11-21T06:37:40.040Z</lastmod>
     <data>
@@ -289,14 +289,14 @@
 
     
   <url>
-    <loc>https://yuiter.com/2020/06/26/angular-modules-introduction/</loc>
-    <lastmod>2020-11-21T06:37:40.039Z</lastmod>
+    <loc>https://yuiter.com/2019/11/19/get-started-with-mediatr-in-asp-net-core/</loc>
+    <lastmod>2020-11-21T06:37:40.040Z</lastmod>
     <data>
         <display>
-        <title>Angular 从入坑到挖坑 - 模块简介</title>
-        <pubTime>2020-06-26T14:13:31.000Z</pubTime>
+        <title>在 ASP.NET Core 项目中使用 MediatR 实现中介者模式</title>
+        <pubTime>2019-11-19T13:52:41.000Z</pubTime>
         
-        <tag>angular</tag>
+        <tag>asp-net-core</tag>
          
          
            
@@ -309,14 +309,14 @@
 
     
   <url>
-    <loc>https://yuiter.com/2019/07/27/asp-net-core-web-api-tutorial/</loc>
+    <loc>https://yuiter.com/2020/06/26/angular-modules-introduction/</loc>
     <lastmod>2020-11-21T06:37:40.039Z</lastmod>
     <data>
         <display>
-        <title>或许是你应该了解的一些 ASP.NET Core Web API 使用小技巧</title>
-        <pubTime>2019-07-27T07:22:41.000Z</pubTime>
+        <title>Angular 从入坑到挖坑 - 模块简介</title>
+        <pubTime>2020-06-26T14:13:31.000Z</pubTime>
         
-        <tag>asp-net-core</tag>
+        <tag>angular</tag>
          
          
            
@@ -364,6 +364,26 @@
            
              
               <breadCrumb title="skills" url="https://yuiter.com/categories/skills/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yuiter.com/2019/07/27/asp-net-core-web-api-tutorial/</loc>
+    <lastmod>2020-11-21T06:37:40.039Z</lastmod>
+    <data>
+        <display>
+        <title>或许是你应该了解的一些 ASP.NET Core Web API 使用小技巧</title>
+        <pubTime>2019-07-27T07:22:41.000Z</pubTime>
+        
+        <tag>asp-net-core</tag>
+         
+         
+           
+             
+              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
           
         </display>
     </data>
@@ -551,12 +571,12 @@
 
     
   <url>
-    <loc>https://yuiter.com/2019/04/28/Vue-Chapter11/</loc>
+    <loc>https://yuiter.com/2019/05/21/Vue-Chapter12/</loc>
     <lastmod>2020-11-21T06:37:40.035Z</lastmod>
     <data>
         <display>
-        <title>【Vue 牛刀小试】：第十一章 - Vue 中 ref 的使用</title>
-        <pubTime>2019-04-28T13:59:11.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第十二章 - 使用 Vue Router 实现 Vue 中的前端路由控制</title>
+        <pubTime>2019-05-21T13:59:11.000Z</pubTime>
         
         <tag>vue-js</tag>
          
@@ -571,12 +591,12 @@
 
     
   <url>
-    <loc>https://yuiter.com/2019/05/21/Vue-Chapter12/</loc>
+    <loc>https://yuiter.com/2019/04/28/Vue-Chapter11/</loc>
     <lastmod>2020-11-21T06:37:40.035Z</lastmod>
     <data>
         <display>
-        <title>【Vue 牛刀小试】：第十二章 - 使用 Vue Router 实现 Vue 中的前端路由控制</title>
-        <pubTime>2019-05-21T13:59:11.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第十一章 - Vue 中 ref 的使用</title>
+        <pubTime>2019-04-28T13:59:11.000Z</pubTime>
         
         <tag>vue-js</tag>
          
@@ -611,12 +631,12 @@
 
     
   <url>
-    <loc>https://yuiter.com/2018/11/15/Vue-Chapter06/</loc>
+    <loc>https://yuiter.com/2019/01/03/Vue-Chapter08/</loc>
     <lastmod>2020-11-21T06:37:40.034Z</lastmod>
     <data>
         <display>
-        <title>【Vue 牛刀小试】：第六章 - 按键修饰符的使用</title>
-        <pubTime>2018-11-15T15:06:42.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第八章 - 组件的基础知识</title>
+        <pubTime>2019-01-03T13:45:28.000Z</pubTime>
         
         <tag>vue-js</tag>
          
@@ -631,12 +651,12 @@
 
     
   <url>
-    <loc>https://yuiter.com/2018/12/12/Vue-Chapter07/</loc>
+    <loc>https://yuiter.com/2018/11/15/Vue-Chapter06/</loc>
     <lastmod>2020-11-21T06:37:40.034Z</lastmod>
     <data>
         <display>
-        <title>【Vue 牛刀小试】：第七章 - Vue 实例的生命周期</title>
-        <pubTime>2018-12-12T13:45:28.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第六章 - 按键修饰符的使用</title>
+        <pubTime>2018-11-15T15:06:42.000Z</pubTime>
         
         <tag>vue-js</tag>
          
@@ -671,12 +691,12 @@
 
     
   <url>
-    <loc>https://yuiter.com/2019/01/03/Vue-Chapter08/</loc>
+    <loc>https://yuiter.com/2018/12/12/Vue-Chapter07/</loc>
     <lastmod>2020-11-21T06:37:40.034Z</lastmod>
     <data>
         <display>
-        <title>【Vue 牛刀小试】：第八章 - 组件的基础知识</title>
-        <pubTime>2019-01-03T13:45:28.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第七章 - Vue 实例的生命周期</title>
+        <pubTime>2018-12-12T13:45:28.000Z</pubTime>
         
         <tag>vue-js</tag>
          
@@ -731,12 +751,12 @@
 
     
   <url>
-    <loc>https://yuiter.com/2018/11/08/Vue-Chapter05/</loc>
+    <loc>https://yuiter.com/2018/11/04/Vue-Chapter04/</loc>
     <lastmod>2020-11-21T06:37:40.033Z</lastmod>
     <data>
         <display>
-        <title>【Vue 牛刀小试】：第五章 - 计算属性与监听器</title>
-        <pubTime>2018-11-08T15:00:42.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第四章 - 页面元素样式的设定</title>
+        <pubTime>2018-11-04T13:44:23.000Z</pubTime>
         
         <tag>vue-js</tag>
          
@@ -751,12 +771,12 @@
 
     
   <url>
-    <loc>https://yuiter.com/2018/11/04/Vue-Chapter04/</loc>
+    <loc>https://yuiter.com/2018/11/08/Vue-Chapter05/</loc>
     <lastmod>2020-11-21T06:37:40.033Z</lastmod>
     <data>
         <display>
-        <title>【Vue 牛刀小试】：第四章 - 页面元素样式的设定</title>
-        <pubTime>2018-11-04T13:44:23.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第五章 - 计算属性与监听器</title>
+        <pubTime>2018-11-08T15:00:42.000Z</pubTime>
         
         <tag>vue-js</tag>
          
@@ -811,26 +831,6 @@
 
     
   <url>
-    <loc>https://yuiter.com/2018/08/27/Vue-Chapter01/</loc>
-    <lastmod>2020-11-21T06:37:40.032Z</lastmod>
-    <data>
-        <display>
-        <title>【Vue 牛刀小试】：第一章 - 一些基础概念</title>
-        <pubTime>2018-08-27T13:39:55.000Z</pubTime>
-        
-        <tag>vue-js</tag>
-         
-         
-           
-             
-              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yuiter.com/2018/08/21/Talking-LaLa2/</loc>
     <lastmod>2020-11-21T06:37:40.032Z</lastmod>
     <data>
@@ -851,16 +851,14 @@
 
     
   <url>
-    <loc>https://yuiter.com/2019/03/20/ASP-NET-Core-on-Linux-S03/</loc>
-    <lastmod>2020-11-21T06:37:40.031Z</lastmod>
+    <loc>https://yuiter.com/2018/08/27/Vue-Chapter01/</loc>
+    <lastmod>2020-11-21T06:37:40.032Z</lastmod>
     <data>
         <display>
-        <title>ASP.NET Core 实战：使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</title>
-        <pubTime>2019-03-20T12:44:01.000Z</pubTime>
+        <title>【Vue 牛刀小试】：第一章 - 一些基础概念</title>
+        <pubTime>2018-08-27T13:39:55.000Z</pubTime>
         
-        <tag>asp-net-core</tag>
-         
-        <tag>linux</tag>
+        <tag>vue-js</tag>
          
          
            
@@ -881,6 +879,28 @@
         <pubTime>2018-07-25T05:30:50.000Z</pubTime>
         
         <tag>asp-net-core</tag>
+         
+         
+           
+             
+              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yuiter.com/2019/03/20/ASP-NET-Core-on-Linux-S03/</loc>
+    <lastmod>2020-11-21T06:37:40.031Z</lastmod>
+    <data>
+        <display>
+        <title>ASP.NET Core 实战：使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</title>
+        <pubTime>2019-03-20T12:44:01.000Z</pubTime>
+        
+        <tag>asp-net-core</tag>
+         
+        <tag>linux</tag>
          
          
            
@@ -1057,26 +1077,6 @@
 
     
   <url>
-    <loc>https://yuiter.com/2018/12/25/ASP-NET-Core-on-Linux-02/</loc>
-    <lastmod>2020-11-21T06:37:40.028Z</lastmod>
-    <data>
-        <display>
-        <title>ASP.NET Core 实战：构建带有版本控制的 API 接口</title>
-        <pubTime>2018-12-25T13:15:08.000Z</pubTime>
-        
-        <tag>asp-net-core</tag>
-         
-         
-           
-             
-              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yuiter.com/2019/05/31/ASP-NET-Core-Route/</loc>
     <lastmod>2020-11-21T06:37:40.028Z</lastmod>
     <data>
@@ -1103,6 +1103,26 @@
         <display>
         <title>ASP.NET Core 实战：使用 ASP.NET Core Web API 和 Vue.js，搭建前后端分离框架</title>
         <pubTime>2018-12-18T12:15:08.000Z</pubTime>
+        
+        <tag>asp-net-core</tag>
+         
+         
+           
+             
+              <breadCrumb title="learning" url="https://yuiter.com/categories/learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yuiter.com/2018/12/25/ASP-NET-Core-on-Linux-02/</loc>
+    <lastmod>2020-11-21T06:37:40.028Z</lastmod>
+    <data>
+        <display>
+        <title>ASP.NET Core 实战：构建带有版本控制的 API 接口</title>
+        <pubTime>2018-12-25T13:15:08.000Z</pubTime>
         
         <tag>asp-net-core</tag>
          

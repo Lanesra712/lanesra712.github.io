@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.7.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>在 ASP.NET Core 应用中使用 Cookie 进行身份认证 - Yu&#39;s</title>
+<meta name="baidu-site-verification" content="c4r1drKDR8" />
+
+    <meta name="description" content="在 ASP.NET Core 应用中，通过使用 Cookie 来完成对于用户的身份认证">
+<meta name="keywords" content="asp-net-core">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+<meta property="og:url" content="https://yuiter.com/2021/01/31/use-cookie-authentication-in-asp-net-core/index.html">
+<meta property="og:site_name" content="Yu&#39;s">
+<meta property="og:description" content="在 ASP.NET Core 应用中，通过使用 Cookie 来完成对于用户的身份认证">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png">
+<meta property="og:updated_time" content="2021-01-31T08:50:37.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+<meta name="twitter:description" content="在 ASP.NET Core 应用中，通过使用 Cookie 来完成对于用户的身份认证">
+<meta name="twitter:image" content="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png">
+<meta name="twitter:creator" content="@danvic712">
+<meta name="twitter:site" content="https://twitter.com/danvic712">
+<link rel="publisher" href="https://plus.google.com/u/0/106320943298605343354">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/logo.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121965445-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-121965445-1');
+</script>
+
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?2bfeb206dacaacbc8f3732e06e93fcb5";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+<script data-ad-client="ca-pub-8337419994980497" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8337419994980497",
+    enable_page_level_ads: true
+  });
+</script> -->
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.jpg" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">首页</a>
+                
+                <a class="navbar-item"
+                href="/archives">时间轴</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我</a>
+                
+                <a class="navbar-item"
+                href="/en">EN</a>
+                
+                <div id="tp-weather-widget" class="navbar-item" style="height:100%"></div>
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Lanesra712">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 读完 (大约 2628 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                在 ASP.NET Core 应用中使用 Cookie 进行身份认证
+            
+        </h1>
+        <div class="content">
+            <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>身份认证是网站最基本的功能，最近因为业务部门的一个需求，需要对一个已经存在很久的小工具网站进行改造，因为在逐步的将一些离散的系统迁移至 .NET Core，所以趁这个机会将这个老的 .NET Framework 4.0 的项目进行升级</p>
+<p>老的项目是一个 MVC 的项目并且有外网访问的需求，大部门的微服务平台因为和内部的业务执行比较密切，介于资安要求与外网进行了隔离，因此本次升级就不会迁移到该平台上进行前后端分离改造</p>
+<p>使用频次不高，不存在高并发，实现周期短，所以就没有必要为了用某些组件而用，因此这里还是选择沿用 MVC 框架，对于网站的身份认证则采用单体应用最常见的 Cookie 认证来实现，本篇文章则是如何实现的一个基础的教程，仅供参考</p>
+<a id="more"></a>
+<h2 id="Step-by-Step"><a href="#Step-by-Step" class="headerlink" title="Step by Step"></a>Step by Step</h2><p>在涉及到系统权限管理的相关内容时，必定会提到两个长的很像的单词，<code>authentication</code>（认证） 和 <code>authorization</code>（授权）</p>
+<ul>
+<li>authentication：用一些数据来证明你就是你，登录系统、指纹、面部解锁就是一种认证的过程</li>
+<li>authorization：授予一些用户去访问一些特殊资源或功能的过程，系统包含管理员和普通用户两种角色，只有管理员才可以执行某些操作，赋予管理员角色某些操作的过程就是授权</li>
+</ul>
+<p>只有认证和授权一起配合，才可以完成对于整个系统的权限管控</p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>假定现在已经存在了一个 ASP.NET Core MVC 应用，这里以 VS 创建的默认项目为例，对于一个 MVC or Web API 应用，要求用户必须登录之后才能进行访问，最简单的方式，在需要认证的 Controller 或 Action 上添加 <code>Authorize</code> 特性，然后在 <code>Startup.Configure</code> 方法中通过 <code>UseAuthorization</code> 添加中间件即可</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Authorize</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HomeController</span> : <span class="title">Controller</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">Index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> View();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Startup</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IWebHostEnvironment env</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        app.UseRouting();</span><br><span class="line"></span><br><span class="line">        app.UseAuthorization();</span><br><span class="line"></span><br><span class="line">        app.UseEndpoints(endpoints =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            endpoints.MapControllerRoute(</span><br><span class="line">                <span class="string">"default"</span>,</span><br><span class="line">                <span class="string">"&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，当系统只包含一个两个 Controller 时还好，当系统比较复杂的时候，再一个个的添加 <code>Authorize</code> 特性就比较麻烦了，因此这里我们可以通过在 <code>Startup.ConfigureServices</code> 中添加全局的 <code>AuthorizeFilter</code> 过滤器，实现对于全局的认证管控</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Startup</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        services.AddControllersWithViews()</span><br><span class="line">            .AddMvcOptions(options =&gt; &#123; options.Filters.Add(<span class="keyword">new</span> AuthorizeFilter()); &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时，对于一些不需要进行认证就可以访问的页面，只需要添加 <code>AllowAnonymous</code> 特性即可</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AuthenticationController</span> : <span class="title">Controller</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">AllowAnonymous</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">Login</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> View();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配置认证策略"><a href="#配置认证策略" class="headerlink" title="配置认证策略"></a>配置认证策略</h3><p>当然，如果只是这样修改的话，其实是有问题的，可以看到，当添加上全局过滤器后，系统已经无法正常的进行访问</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/use-cookie-authentication-in%20asp-net-core/20210130195717.png" alt="启用授权中间件"></p>
+<p>对于 authorization（授权） 来说，它其实是在 authentication（认证）通过之后才会进行的操作，也就是说这里我们缺少了对于系统认证的配置，依据报错信息的提示，我们首先需要通过使用 <code>AddAuthentication</code> 方法来定义系统的认证策略</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/use-cookie-authentication-in%20asp-net-core/20210130201434.png" alt="认证策略"></p>
+<p><code>AddAuthentication</code> 方法位于 <code>Microsoft.AspNetCore.Authentication</code> 类库中，通过在 Nuget 中搜索就可以发现，.NET Core 已经基于业界通用的规范实现了多个认证策略</p>
+<p>因为这里使用的 Cookie 认证已经包含在默认的项目模板中了，所以就不需要再引用了</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/use-cookie-authentication-in%20asp-net-core/20210130202634.png" alt="添加认证服务"></p>
+<p>基于 .NET Core 标准的服务使用流程，首先，我们需要在 <code>Startup.ConfigureServices</code> 方法来中通过 <code>AddAuthentication</code> 来定义整个系统所使用的一个授权策略，以及，基于我们采用 Cookie 授权的方式，结合目前互联网针对跨站点请求伪造 (CSRF) 攻击的防范要求，我们需要对网站的 Cookie 进行一些设定</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Startup</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 定义授权策略</span></span><br><span class="line">        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)</span><br><span class="line">            .AddCookie(options =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 无权访问的页路径</span></span><br><span class="line">                options.AccessDeniedPath = <span class="keyword">new</span> PathString(<span class="string">"/permission/forbidden"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 登录路径</span></span><br><span class="line">                options.LoginPath = <span class="keyword">new</span> PathString(<span class="string">"/authentication/login"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 登出路径</span></span><br><span class="line">                options.LogoutPath = <span class="keyword">new</span> PathString(<span class="string">"/authentication/logout"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Cookie 过期时间(20 分钟)</span></span><br><span class="line">                options.ExpireTimeSpan = TimeSpan.FromMinutes(<span class="number">20</span>);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 配置 Cookie 策略</span></span><br><span class="line">        services.Configure&lt;CookiePolicyOptions&gt;(options =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 默认用户同意非必要的 Cookie</span></span><br><span class="line">            options.CheckConsentNeeded = context =&gt; <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 定义 SameSite 策略，Cookies允许与顶级导航一起发送</span></span><br><span class="line">            options.MinimumSameSitePolicy = SameSiteMode.Lax;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如代码所示，在定义授权策略时，我们定义了三个重定向的页面，去告诉 Cookie 授权策略这里对应的页面在何处，同时，因为身份验证 Cookie 的默认过期时间会持续到关闭浏览器为止，也就是说，只要用户不点击退出按钮并且不关闭浏览器，用户会一直处于已经登录的状态，所以这里我们设定 20 分钟的过期时间，避免一些不必要的风险</p>
+<p>至此，对于 Cookie 认证策略的配置就完成了，现在就可以在 <code>Startup.Configure</code> 方法中添加 <code>UseAuthentication</code> 中间件到 HTTP 管道中，实现对于网站认证的启用，这里需要注意，因为是先认证再授权，所以中间件的添加顺序不可以颠倒</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Startup</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IWebHostEnvironment env</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        app.UseRouting();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加认证授权（顺序不可以颠倒）</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        app.UseAuthentication();</span><br><span class="line">        app.UseAuthorization();</span><br><span class="line"></span><br><span class="line">        app.UseEndpoints(endpoints =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            endpoints.MapControllerRoute(</span><br><span class="line">                <span class="string">"default"</span>,</span><br><span class="line">                <span class="string">"&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时，当我们再次访问系统时，因为没有经过认证，自动触发了重定向到系统登录页面的操作，而这里重定向跳转的页面就是上文代码中配置的 <code>LoginPath</code> 的属性值</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/use-cookie-authentication-in%20asp-net-core/20210131144427.gif" alt="登录重定向"></p>
+<h3 id="登录、登出实现"><a href="#登录、登出实现" class="headerlink" title="登录、登出实现"></a>登录、登出实现</h3><p>当认证策略配置完成之后，就可以基于选择的策略来进行登录功能的实现。这里的登录页面上的按钮，模拟了一个登录表单提交，当点击之后会触发系统的认证逻辑，实现代码如下所示。这里别忘了将登录事件的 Action 上加上 <code>AllowAnonymous</code> 特性从而允许匿名访问</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">HttpPost</span>]</span><br><span class="line">[<span class="meta">AllowAnonymous</span>]</span><br><span class="line">[<span class="meta">ValidateAntiForgeryToken</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task&lt;IActionResult&gt; <span class="title">LoginAsync</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 1、Todo:校验账户、密码是否正确，获取需要的用户信息</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2、创建用户声明信息</span></span><br><span class="line">    <span class="keyword">var</span> claims = <span class="keyword">new</span> List&lt;Claim&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">new</span> Claim(ClaimTypes.Name, <span class="string">"张三"</span>),</span><br><span class="line">        <span class="keyword">new</span> Claim(ClaimTypes.MobilePhone, <span class="string">"13912345678"</span>)</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3、创建声明身份证</span></span><br><span class="line">    <span class="keyword">var</span> claimIdentity = <span class="keyword">new</span> ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4、创建声明身份证的持有者</span></span><br><span class="line">    <span class="keyword">var</span> claimPrincipal = <span class="keyword">new</span> ClaimsPrincipal(claimIdentity);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5、登录</span></span><br><span class="line">    <span class="keyword">await</span> HttpContext.SignInAsync(claimPrincipal);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Redirect(<span class="string">"/"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在整块的代码中，涉及到三个主要的对象，<code>Claim</code>、<code>ClaimsIdentity</code> 和 <code>ClaimsPrincipal</code>，通过对于这三个对象的使用，从而实现将用户登录成功后系统所需的用户信息包含在 Cookie 中</p>
+<p>三个对象之间的区别，借用<a href="https://www.cnblogs.com/dudu/p/6367303.html" target="_blank" rel="noopener">理解ASP.NET Core验证模型(Claim, ClaimsIdentity, ClaimsPrincipal)不得不读的英文博文</a>这篇博客的解释来说明</p>
+<ul>
+<li>Claim：被验证主体特征的一种表述，比如：登录用户名是…，email是…，用户Id是…，其中的“登录用户名”，“email”，“用户Id”就是 ClaimType</li>
+<li>ClaimsIdentity：一组 claims 构成了一个 identity，具有这些 claims 的 identity 就是 ClaimsIdentity ，驾照就是一种 ClaimsIdentity，可以把 ClaimsIdentity理解为“证件”，驾照是一种证件，护照也是一种证件</li>
+<li>ClaimsPrincipal：ClaimsIdentity 的持有者就是 ClaimsPrincipal ，一个 ClaimsPrincipal 可以持有多个 ClaimsIdentity，就比如一个人既持有驾照，又持有护照</li>
+</ul>
+<p>最后，通过调用 <code>HttpContext.SignInAsync</code> 方法就可以完成登录功能，可以看到，当 Cookie 被清除后，用户也就处于登出的状态了，当然，我们也可以通过手动的调用 <code>HttpContext.SignOutAsync</code> 来实现登出</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/use-cookie-authentication-in%20asp-net-core/20210131153517.gif" alt="登录实现"></p>
+<h3 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h3><p>对于添加在 Claim 中的信息，我们可以通过指定 ClaimType 的方式获取到，在 View 和 Controller 中，我们可以直接通过下面的方式进行获取，这里使用到的 User 其实就是上文中提到的 ClaimsPrincipal</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> userName = User.FindFirst(ClaimTypes.Name)?.Value;</span><br></pre></td></tr></table></figure>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/use-cookie-authentication-in%20asp-net-core/20210131155307.png" alt="User 对象"></p>
+<p>而当我们需要在一个独立的类库中获取存储的用户信息时，我们需要进行如下的操作</p>
+<p>第一步，在 <code>Startup.ConfigureServices</code> 方法中注入 <code>HttpContextAccessor</code> 服务</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Startup</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 注入 HttpContext</span></span><br><span class="line">        services.AddHttpContextAccessor();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二步，在你需要使用的类库中通过 Nuget 引用 <code>Microsoft.AspNetCore.Http</code>，之后就可以在具体的类中通过注入 <code>IHttpContextAccessor</code> 来获取到用户信息，当然，也可以在此处实现登录、登出的方法</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">Sample.Infrastructure</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICurrentUser</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">string</span> UserName &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function">Task <span class="title">SignInAsync</span>(<span class="params">ClaimsPrincipal principal</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function">Task <span class="title">SignOutAsync</span>(<span class="params"></span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function">Task <span class="title">SignOutAsync</span>(<span class="params"><span class="keyword">string</span> scheme</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CurrentUser</span> : <span class="title">ICurrentUser</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> IHttpContextAccessor _httpContextAccessor;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> HttpContext HttpContext =&gt; _httpContextAccessor.HttpContext;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">CurrentUser</span>(<span class="params">IHttpContextAccessor httpContextAccessor</span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            _httpContextAccessor = httpContextAccessor ?? <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentNullException(<span class="keyword">nameof</span>(httpContextAccessor));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">string</span> UserName =&gt; HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Task <span class="title">SignInAsync</span>(<span class="params">ClaimsPrincipal principal</span>) </span>=&gt; HttpContext.SignInAsync(principal);</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Task <span class="title">SignOutAsync</span>(<span class="params"></span>) </span>=&gt; HttpContext.SignOutAsync();</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Task <span class="title">SignOutAsync</span>(<span class="params"><span class="keyword">string</span> scheme</span>) </span>=&gt; HttpContext.SignOutAsync(scheme);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，整块的认证功能就已经实现了，希望对你有所帮助</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie/SameSite" target="_blank" rel="noopener">SameSite cookies</a></li>
+<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/samesite?view=aspnetcore-5.0" target="_blank" rel="noopener">Work with SameSite cookies in ASP.NET Core</a></li>
+<li><a href="https://stackoverflow.com/questions/52709492/what-does-the-cookieauthenticationoptions-logoutpath-property-do-in-asp-net-core" target="_blank" rel="noopener">What does the CookieAuthenticationOptions.LogoutPath property do in ASP.NET Core 2.1?</a></li>
+<li><a href="https://www.cnblogs.com/dudu/p/6367303.html" target="_blank" rel="noopener">理解ASP.NET Core验证模型(Claim, ClaimsIdentity, ClaimsPrincipal)不得不读的英文博文</a></li>
+<li><a href="https://andrewlock.net/introduction-to-authentication-with-asp-net-core/" target="_blank" rel="noopener">Introduction to Authentication with ASP.NET Core</a></li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/asp-net-core/">asp-net-core</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">码字不易,求支持~~~</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/alipay.JPG" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/wechat.JPG" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="98U55DZYZE454" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/">
+                <span class="level-item">从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: 'afc98711beb972f6c557',
+        clientSecret: '76ae9cc34495454189a80d2f48f1ffc35c2dd2a4',
+        id: '552430fe8ed77b77d56f2922eca4473e',
+        repo: 'lanesra712.github.io',
+        owner: 'Lanesra712',
+        admin: "Lanesra712",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/avatar.png" alt="墨墨墨墨小宇">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        墨墨墨墨小宇
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        .NET 程序员，枪手死忠
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>合肥, 安徽</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            56
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            12
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Lanesra712" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/Lanesra712">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="博客园" href="https://www.cnblogs.com/danvic712/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="掘金" href="https://juejin.im/user/5bd93a936fb9a0224268c11b">
+                
+                <i class="far fa-gem"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Email" href="mailto:danvic96@hotmail.com">
+                
+                <i class="fa fa-envelope"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="http://feed.cnblogs.com/blog/u/404772/rss/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Overview">
+        <span class="has-mr-6">1</span>
+        <span>Overview</span>
+        </a></li><li>
+        <a class="is-flex" href="#Step-by-Step">
+        <span class="has-mr-6">2</span>
+        <span>Step by Step</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#前期准备">
+        <span class="has-mr-6">2.1</span>
+        <span>前期准备</span>
+        </a></li><li>
+        <a class="is-flex" href="#配置认证策略">
+        <span class="has-mr-6">2.2</span>
+        <span>配置认证策略</span>
+        </a></li><li>
+        <a class="is-flex" href="#登录、登出实现">
+        <span class="has-mr-6">2.3</span>
+        <span>登录、登出实现</span>
+        </a></li><li>
+        <a class="is-flex" href="#获取用户信息">
+        <span class="has-mr-6">2.4</span>
+        <span>获取用户信息</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">3</span>
+        <span>Reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/angular/">
+                        <span class="tag">angular</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/asp-net-core/">
+                        <span class="tag">asp-net-core</span>
+                        <span class="tag is-grey">20</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/collections/">
+                        <span class="tag">collections</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/csharp/">
+                        <span class="tag">csharp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/devops/">
+                        <span class="tag">devops</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/domain-driven-design/">
+                        <span class="tag">domain-driven-design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/elastic-stack/">
+                        <span class="tag">elastic-stack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/feeling/">
+                        <span class="tag">feeling</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/planning/">
+                        <span class="tag">planning</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vue-js/">
+                        <span class="tag">vue-js</span>
+                        <span class="tag is-grey">20</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                码字不易
+            </h3>
+            <a target="_blank" href="https://url.cn/56I82Uq">
+                <img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/ads/tencent/gift-at-the-end%20-of-2019-year.jpg" title="【腾讯云·年末有礼】云产品限时秒杀，云服务器1核2G，首年128元">
+            </a>
+            <a target="_blank" href="https://cloud.tencent.com/redirect.php?redirect=1014&cps_key=e68037240aa92c0cfff6ee2ca9c51c5b&from=console">
+                <img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Ads/txcloud.jpg" title="云服务器、云数据库特惠，服务更稳，速度更快，价格更优">
+            </a>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- ads -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8337419994980497"
+                data-ad-slot="7298620842"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time></div>
+                    <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail4.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-17T02:48:49.000Z">2020-10-17</time></div>
+                    <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-02T02:48:49.000Z">2020-10-02</time></div>
+                    <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail5.jpg" alt="手摸手 Elastic Stack 使用教程 - 环境安装">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T03:48:49.000Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手摸手 Elastic Stack 使用教程 - 环境安装</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png" alt="如何在 asp.net core 的中间件中返回具体的页面">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-16T08:58:15.000Z">2020-08-16</time></div>
+                    <a href="/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/" class="title has-link-black-ter is-size-6 has-text-weight-normal">如何在 asp.net core 的中间件中返回具体的页面</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/excerpts/">
+            <span class="level-start">
+                <span class="level-item">excerpts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/learning/">
+            <span class="level-start">
+                <span class="level-item">learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">45</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mumble/">
+            <span class="level-start">
+                <span class="level-item">mumble</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/skills/">
+            <span class="level-start">
+                <span class="level-item">skills</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time></div>
+                    <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail4.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-17T02:48:49.000Z">2020-10-17</time></div>
+                    <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-02T02:48:49.000Z">2020-10-02</time></div>
+                    <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail5.jpg" alt="手摸手 Elastic Stack 使用教程 - 环境安装">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T03:48:49.000Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手摸手 Elastic Stack 使用教程 - 环境安装</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png" alt="如何在 asp.net core 的中间件中返回具体的页面">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-16T08:58:15.000Z">2020-08-16</time></div>
+                    <a href="/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/" class="title has-link-black-ter is-size-6 has-text-weight-normal">如何在 asp.net core 的中间件中返回具体的页面</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/excerpts/">
+            <span class="level-start">
+                <span class="level-item">excerpts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/learning/">
+            <span class="level-start">
+                <span class="level-item">learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">45</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mumble/">
+            <span class="level-start">
+                <span class="level-item">mumble</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/skills/">
+            <span class="level-start">
+                <span class="level-item">skills</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.jpg" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 - 2021 <br/>
+                Powered by <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                        墨墨墨墨小宇
+                        <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                Built by <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Lanesra712">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://yuiter.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+<script src="/js/love.js"></script>
+<script type="text/javascript" src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
+<script>
+    (function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+    window.SeniverseWeatherWidget('show', {
+      flavor: "slim",
+      location: "WX4FBXXFKE4F",
+      geolocation: true,
+      language: "auto",
+      unit: "c",
+      theme: "light",
+      token: "ac57042f-0e76-4ad6-b274-2c5df9d97712",
+      hover: "enabled",
+      container: "tp-weather-widget"
+    })
+  </script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
