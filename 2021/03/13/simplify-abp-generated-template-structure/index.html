@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.7.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>ABP 适用性改造 - 精简 ABP CLI 生成的项目结构 - Yu&#39;s</title>
+<meta name="baidu-site-verification" content="c4r1drKDR8" />
+
+    <meta name="description" content="基于个人的开发习惯，简化 ABP 默认生成的项目模板，构建适合个人开发习惯的项目脚手架">
+<meta name="keywords" content="asp-net-core,abp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ABP 适用性改造 - 精简 ABP CLI 生成的项目结构">
+<meta property="og:url" content="https://yuiter.com/2021/03/13/simplify-abp-generated-template-structure/index.html">
+<meta property="og:site_name" content="Yu&#39;s">
+<meta property="og:description" content="基于个人的开发习惯，简化 ABP 默认生成的项目模板，构建适合个人开发习惯的项目脚手架">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png">
+<meta property="og:updated_time" content="2021-03-17T13:33:15.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ABP 适用性改造 - 精简 ABP CLI 生成的项目结构">
+<meta name="twitter:description" content="基于个人的开发习惯，简化 ABP 默认生成的项目模板，构建适合个人开发习惯的项目脚手架">
+<meta name="twitter:image" content="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png">
+<meta name="twitter:creator" content="@danvic712">
+<meta name="twitter:site" content="https://twitter.com/danvic712">
+<link rel="publisher" href="https://plus.google.com/u/0/106320943298605343354">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/logo.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121965445-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-121965445-1');
+</script>
+
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?2bfeb206dacaacbc8f3732e06e93fcb5";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+<script data-ad-client="ca-pub-8337419994980497" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8337419994980497",
+    enable_page_level_ads: true
+  });
+</script> -->
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.jpg" alt="ABP 适用性改造 - 精简 ABP CLI 生成的项目结构" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">首页</a>
+                
+                <a class="navbar-item"
+                href="/archives">时间轴</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我</a>
+                
+                <a class="navbar-item"
+                href="/en">EN</a>
+                
+                <div id="tp-weather-widget" class="navbar-item" style="height:100%"></div>
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/danvic712">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png" alt="ABP 适用性改造 - 精简 ABP CLI 生成的项目结构">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-03-13T06:41:44.000Z">2021-03-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    29 分钟 读完 (大约 4367 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                ABP 适用性改造 - 精简 ABP CLI 生成的项目结构
+            
+        </h1>
+        <div class="content">
+            <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>不管是公司或者个人都会有不同的开发习惯，通过建立项目模板，既可以使开发人员聚焦于业务功能的开发，也可以在一定程度上统一不同开发人员之间的开发风格。在使用 ABP 框架的过程中，对于 ABP 生成的默认项目模板，类库多，附加功能多，是目前在部门内部推行 ABP 过程中遇到的问题。因此，本篇文章将针对 ABP 默认生成的模板项目进行精简，构建出一个简化版的 ABP 项目模板</p>
+<p>模板源码地址：<a href="https://github.com/danvic712/ingos-abp-api-template" target="_blank" rel="noopener">https://github.com/danvic712/ingos-abp-api-template</a></p>
+<a id="more"></a>
+<h2 id="Step-by-Step"><a href="#Step-by-Step" class="headerlink" title="Step by Step"></a>Step by Step</h2><p>在精简项目结构之前肯定需要一个由 ABP CLI 生成的默认项目模板供我们进行参考，创建 ABP 项目主要有如下的两种方式进行</p>
+<p>第一种，通过使用  <a href="https://docs.abp.io/en/abp/latest/CLI" target="_blank" rel="noopener">ABP CLI</a> 这么一个 dotnet tool 来创建一个基础项目，只需要将 ABP CLI 全局安装到电脑上，就可以通过脚手架来生成所需项目</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 全局安装 ABP CLI</span><br><span class="line">dotnet tool install -g Volo.Abp.Cli</span><br><span class="line"></span><br><span class="line">-- 全局更新 ABP CLI</span><br><span class="line">dotnet tool update -g Volo.Abp.Cli</span><br></pre></td></tr></table></figure>
+<p>当安装完成之后，输入 <code>abp help</code> 就可以查看该脚手架提供的功能，例如这里我们需要通过 <code>abp new</code> 命令来创建项目，同时基于不同的需求，在创建项目时附加不同的参数即可</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313151259.png" alt="ABP CLI"></p>
+<p>第二种，则是直接通过官网(<a href="https://abp.io/get-started" target="_blank" rel="noopener">https://abp.io/get-started</a>)进行下载，本篇文章中所使用到的项目模板就是使用该方法，直接在官网上下载的模板基础上进行调整的</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313151333.png" alt="创建项目"></p>
+<p>在官网创建项目时需要输入项目的相关信息，因为这里需要改造的是 Web API 项目，所以 UI 框架选择了 Angular，同时，因为默认的 ABP 模板会把 IdentityServer 和 API 项目混在一起，所以这里我会把这两块的功能进行拆分，确定项目类型无误之后，点击现在创建按钮，等待浏览器提示有文件需要下载即可</p>
+<h3 id="运行模板项目"><a href="#运行模板项目" class="headerlink" title="运行模板项目"></a>运行模板项目</h3><p>解压下载完成的安装包，如果你和我创建的项目选项相同的话，这里会包含两个文件夹，因为仅针对后端项目进行调整，这里只关注 aspnet-core 文件夹中的内容即可。在改造之前，我们先依据官方文档中的使用说明来进行操作，确保模板是可以正常运行起来之后再进行后续的调整。</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313170833.png" alt="模板文件夹结构"></p>
+<h4 id="调整数据库连接字符串"><a href="#调整数据库连接字符串" class="headerlink" title="调整数据库连接字符串"></a>调整数据库连接字符串</h4><p>在 ABP 生成的模板项目中，整个项目的配置文件 appsettings.json 文件存在于三个地方，<code>.DbMigrator</code>、<code>.HttpApi.Host</code>、<code>.IdentityServer</code>，先不去关注这三个项目的具体作用，首先将这三处配置文件中的数据库连接字符串修改为实际使用的配置信息</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"ConnectionStrings": &#123;</span><br><span class="line">    "Default": "Server=localhost;Port=3306;Database=IngosAbpTemplate;Uid=root;Pwd=myPassword;"</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="执行数据库迁移"><a href="#执行数据库迁移" class="headerlink" title="执行数据库迁移"></a>执行数据库迁移</h4><p>在调整完数据库连接配置之后，就可以执行数据库的迁移操作，从而实现初始化项目模板中内置的一些数据表结构 or 初始化数据</p>
+<p>这里，将 <code>.DbMigrator</code> 设置为启动项目，直接运行，等待程序的运行完成即可。此时，打开你所使用的 DBMS 工具，可以看到模板项目中定义的表已经迁移到了我们指定的数据库中 </p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313171427.png" alt="执行数据库迁移"></p>
+<p>可以看到，整个模板项目中包含了很多的东西，绝大多数的功能都不会是我们平常在开发业务功能时经常能够使用到的</p>
+<h4 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h4><p>当数据库迁移成功之后就可以正式运行了，在这个模板程序中存在着两个 Web 应用，<code>.HttpApi.Host</code>、<code>.IdentityServer</code>，分别对应于 API 接口的宿主以及 IdentityServer 的宿主，因为后续会移除掉 IdentityServer 相关的功能，所以这里就只运行 <code>.HttpApi.Host</code> 这一个站点了</p>
+<p>将 <code>.HttpApi.Host</code> 设置为启动程序，这里并不会进行调试，所以直接通过 Ctrl + F5 运行，项目会自动打开 swagger 页面</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313171910.png" alt="Swagger"></p>
+<h3 id="精简项目功能"><a href="#精简项目功能" class="headerlink" title="精简项目功能"></a>精简项目功能</h3><p>当程序可以运行起来之后，就可以针对模板项目进行精简及改造，这里主要包含两块的内容，精简模板的功能以及简化项目的结构</p>
+<h4 id="精简模板功能"><a href="#精简模板功能" class="headerlink" title="精简模板功能"></a>精简模板功能</h4><p>首先这里会移除掉 <code>.IdentityServer</code> 这个 Web 项目以及目前使用不到的 test 文件夹，从上面运行的 swagger 页面中就可以看到，初始化的模板中包含了一些业务功能开发中可能用不到的功能，而这些功能则是包含在项目所引用的 ABP 类库中的。因此，对于模板功能的精简则是将引用的一些用不到的 <code>Volo.Abp.*</code> 类库进行去除，仅保留我们所需的部分</p>
+<p>这里我移除了下列的程序集引用，重新编译解决方案，不出意外会报很多的错误，因为具体的排错过程会涉及到很多，不太好用文字进行描述，所以这里就跳过了</p>
+<ul>
+<li>Volo.Abp.Account.*</li>
+<li>Volo.Abp.Identity.*</li>
+<li>Volo.Abp.IdentityServer.*</li>
+<li>Volo.Abp.PermissionManagement.*</li>
+<li>Volo.Abp.TenantManagement.*</li>
+<li>Volo.Abp.FeatureManagement.*</li>
+<li><p>Volo.Abp.SettingManagement.*</p>
+</li>
+<li><p>Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy</p>
+</li>
+</ul>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313184045.png" alt="报错信息"></p>
+<p>这里对于模板项目中的功能基本上都移除了，只保留了 audit 日志、后台任务、邮件通知、对象映射、EF Core 这类的基础服务</p>
+<p>总结来说，对于移除功能后导致的编译报错，只需要将相关的类文件、引用直接删除就好，而对于功能移除之后产生的代码问题，就需要具体分析了，这类的问题基本上是初始化数据（DataSeed）的功能，我这边采取的是直接移除相关的功能</p>
+<p>至此，当你进行到这一步时，也就可以顺势将 <code>.DbMigrator</code> 这个专门用于数据库迁移的控制台应用进行移除了，而对于迁移的这个功能，在下面的内容中我也将补充到别的类库上</p>
+<p>哦对了，在移除上面的功能之后，你还需要在如下的类库中添加对应的 ABP 程序集引用，从而确保程序可以编译通过</p>
+<ul>
+<li><code>.Application</code> 引用 <code>Volo.Abp.Ddd.Application</code></li>
+<li><code>.Domain.Shared</code> 引用 <code>Volo.Abp.Validation</code> </li>
+<li><code>.HttpApi</code> 引用 <code>Volo.Abp.AspNetCore.Mvc</code> </li>
+<li><code>.HttpApi.Client</code> 引用 <code>Volo.Abp.Http.Client</code> </li>
+</ul>
+<p>如果不出意外的话，你的应用已经能够编译成功，并且可以再次运行了，从 swagger 也就可以看出，整个模板去掉了绝大多数的功能。当然，如果你觉得这个过程比较麻烦的话，也可以直接使用文章开头所列到的 github 的项目，然后在上面基于你的需求进行调整即可 </p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313192213.png" alt="精简功能"></p>
+<h3 id="简化项目结构"><a href="#简化项目结构" class="headerlink" title="简化项目结构"></a>简化项目结构</h3><p>让我们再回到最原始的后端模板项目中，整个后端解决方案的项目全局结构如下所示</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313202643.png" alt="解决方案结构"></p>
+<p>因为移除了单元测试的相关类库，从项目依赖关系图中就可以看到，整个解决方案中，包含了三个最顶层的项目，<code>.IdentityServer</code>、<code>.HttpApi.Host</code>、<code>.DbMigrator</code>，其它类库之间通过相互引用，构建出项目的分层基础</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313203327.png" alt="依赖关系"></p>
+<p>当然，在上面进行模板功能的精简时，已经将 <code>.IdentityServer</code>、<code>.DbMigrator</code> 这一块进行了整体的移除</p>
+<h4 id="合并-EntityFramework-Core-相关功能类库"><a href="#合并-EntityFramework-Core-相关功能类库" class="headerlink" title="合并 EntityFramework Core 相关功能类库"></a>合并 EntityFramework Core 相关功能类库</h4><p>因为这里选择了 EntityFramework Core（以下简称 EF Core）作为项目的 ORM，如果使用 Code First 模式的话，不可避免的会使用到 migrations 这样一个迁移的操作，在原始的模板中，存在着如下的三个类库与之存在关联</p>
+<ul>
+<li>.DbMigrator：控制台程序，主要是为了进行数据库的迁移工作（migration）</li>
+<li>.EntityFrameworkCore：集成 EF Core 到项目中，定义 DbContext 和领域中的数据访问仓储（Repository），在整个项目中提供数据持久化以及数据访问</li>
+<li>.EntityFrameworkCore.DbMigrations：执行 EF Core 的迁移</li>
+</ul>
+<p>可以看到，ABP 作为一个模块化的框架，对于每个类库的使用用途定义的非常清楚，但是，在实际的开发中，对于正式环境数据库的操作基本上都是交由 DBA 来执行的，EF Core 的 migration 更多的是在开发时进行使用。同时，如果真的这样划分的话，至少我遇到的绝大多数开发人员都是会叫的</p>
+<p>介于上面已经将 <code>.DbMigrator</code> 进行了移除，因此，这里将对于 EF Core 的相关操作全部合并到 <code>.EntityFrameworkCore</code> 这个类库中</p>
+<p>为了方便起见，我们先把  <code>.EntityFrameworkCore.DbMigrations</code> 中的文件全部拷贝一份到 <code>.EntityFrameworkCore</code> 这个类库中，然后直接在解决方案中移除掉原有的类库后再进行调整</p>
+<p>PS：这里的 Migrations 文件夹以及 <code>.EntityFrameworkCore.DbMigrations</code>  的模块类就可以直接删除了，毕竟上面我们精简了模板的功能后，绝大多数的表也不复存在了 ，后面在类库合并后也会重新执行数据库迁移的操作</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313213701.png" alt="合并 EF Core 相关类库"></p>
+<p>因为现在会在 <code>.EntityFrameworkCore</code> 上执行 migration 的操作，所以这里需要添加上 EF Core 官方的 Design 组件包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Install-Package Microsoft.EntityFrameworkCore.Design</span><br></pre></td></tr></table></figure>
+<p>对于从 <code>.DbMigrations</code> 这个类库，其实是存在引用关系的，当整体删除之后，我们需要在 <code>.HttpApi.Host</code>  上添加对于 <code>.EntityFrameworkCore</code> 这个类库的引用。同时，对于拷贝过来的文件，其实是存在功能重复的问题，所以这里我们需要对这些文件进行合并归纳</p>
+<p>首先，则是需要对于 DbContext 这个数据库上下文对象进行合并。从下图中可以看到，两个 DbContext 主要在配置实体映射关系的地方有所差异，因此这里直接将 <code>MigrationsDbContext</code> 这个类中关于 ABP 内置框架的实体映射配置拷贝过去即可，然后就可以直接删除了</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313214701.png" alt="合并 DbContext"></p>
+<p>对于每个 ABP 类库来说，都会存在一个入口的模块类，这里对比后就可以发现，直接将 <code>EntityFrameworkCoreDbMigrationsModule</code> 这个模块类删除即可，然后你需要将 <code>.HttpApi.Host</code> 项目中引用的这个模块类型改为 <code>EntityFrameworkCoreModule</code></p>
+<p>此时，编译解决方案，报错的问题主要是因为引用了已经删除的 DbContext，这里直接替换成现在使用的即可</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210313215737.png" alt="修复 DbContext 引用错误的问题"></p>
+<p>这里还有一项需要注意，从上图中的第 27 行可以看到，这里获取的是 <code>.DbMigrator</code> 这个控制台应用中的配置文件，所以这里也需要同步修改成获取 <code>.HttpApi.Host</code> 项目中的配置文件</p>
+<p>自此，涉及到 EF Core 相关功能的类库就合并完成了，定位到 <code>.EntityFrameworkCore</code> 这个类库，在控制台中就可以通过 migrations 命令来执行数据库的迁移工作。因为已经执行过一次了，所以直接将原来的库删除即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 1、创建迁移文件</span><br><span class="line">dotnet ef migrations add Initialize</span><br><span class="line"></span><br><span class="line">-- 2、应用到数据库中</span><br><span class="line">dotnet ef database update</span><br></pre></td></tr></table></figure>
+<p>PS：这里使用的是 EF Core tools 这么一个 dotnet tool，如果控制台提示你找不到命令的话，你需要先安装该工具到你的电脑上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet tool install --global dotnet-ef</span><br></pre></td></tr></table></figure>
+<p>等待迁移工作的完成，数据库也重新生成了对应的表，此时再次运行项目，系统运行无误后即可进行后续的操作</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210317200318.png" alt="迁移完成"></p>
+<h4 id="合并-API-宿主相关功能"><a href="#合并-API-宿主相关功能" class="headerlink" title="合并 API 宿主相关功能"></a>合并 API 宿主相关功能</h4><p>一般来说，我们会在 ASP.NET Core 项目中来定义 Controller，并以此作为整个接口项目的宿主程序，在 ABP 中，涉及到 API 接口的包含了如下的三个类库</p>
+<ul>
+<li>.HttpApi：定义 API 接口的 controller</li>
+<li>.HttpApi.Client：用于设置其它 C# 程序调用该 API 的 HTTP 代理</li>
+<li>.HttpApi.Host：API 接口的宿主程序</li>
+</ul>
+<p>这里的 <code>.HttpApi.Client</code> 的类库我们使用不到，所以直接删除即可，对于剩下的两个类库将进行合并，统一至 <code>.HttpApi.Host</code> 这个 ASP.NET Core 项目中</p>
+<p>对于这两个类库的合并很简单，直接将 <code>.HttpApi</code> 项目中的类文件直接拷贝到 <code>.HttpApi.Host</code> 中即可，然后将模块类中的配置进行移动，最后直接删除 <code>.HttpApi</code> 类库，并将相关引用删除即可</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210317202030.png" alt="合并 API 相关功能"></p>
+<p>至此，整个模板项目的简化也就结束了，在保留 ABP 的设计思想下，基于开发现状，构建了一个相对单一的模板项目，调整后的项目引用关系图如下所示</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210317202658.png" alt="项目引用关系图"></p>
+<h3 id="搭建项目脚手架"><a href="#搭建项目脚手架" class="headerlink" title="搭建项目脚手架"></a>搭建项目脚手架</h3><p>当整个调整完成之后，后续再创建一个新的项目时不可能再执行一次这样的操作，因此这里会创建一个 nuget 包进行发布，这样后面就可以直接通过 dotnet cli 命令来直接创建项目来使用</p>
+<p>对于搭建项目模板的过程这里就不详细描述了，如果有需要的同学，可以参考博客园中的这一篇文章（<a href="https://www.cnblogs.com/catcher1994/p/10061470.html" target="_blank" rel="noopener">打造自己的.NET Core项目模板</a>），在这个过程中我们需要新建两个文件 <code>template.json</code> 以及 <code>Ingos.Abp.Templates.csproj</code> ，调整后的项目文件夹结构如下所示</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210317204633.png" alt="项目脚手架结构"></p>
+<p>这里列出来了我目前使用的配置，你可以进行参考，如果你需要添加别的参数的话，可以参考官网文档（<a href="https://docs.microsoft.com/zh-cn/dotnet/core/tools/custom-templates" target="_blank" rel="noopener">dotnet new 自定义模板</a>）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"$schema"</span>: <span class="string">"http://json.schemastore.org/template"</span>,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">"Danvic Wang"</span>,</span><br><span class="line">  <span class="attr">"classifications"</span>: [ <span class="string">"Web/WebAPI"</span> ],</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"Ingos Web API with ABP Framework"</span>,</span><br><span class="line">  <span class="attr">"identity"</span>: <span class="string">"Ingos.Abp.Templates"</span>,</span><br><span class="line">  <span class="attr">"shortName"</span>: <span class="string">"ingos-abp"</span>,</span><br><span class="line">  <span class="attr">"tags"</span>: &#123;</span><br><span class="line">    <span class="attr">"language"</span>: <span class="string">"C#"</span>,</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"project"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"sourceName"</span>: <span class="string">"IngosAbpTemplate"</span>,</span><br><span class="line">  <span class="attr">"preferNameDirectory"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Project</span> <span class="attr">Sdk</span>=<span class="string">"Microsoft.NET.Sdk"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">PropertyGroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PackageType</span>&gt;</span>Template<span class="tag">&lt;/<span class="name">PackageType</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PackageVersion</span>&gt;</span>1.0.1<span class="tag">&lt;/<span class="name">PackageVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PackageId</span>&gt;</span>Ingos.Abp.Templates<span class="tag">&lt;/<span class="name">PackageId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Title</span>&gt;</span>Ingos.Abp.Templates<span class="tag">&lt;/<span class="name">Title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Authors</span>&gt;</span>Danvic Wang<span class="tag">&lt;/<span class="name">Authors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Description</span>&gt;</span>Ingos Web API with ABP Framework<span class="tag">&lt;/<span class="name">Description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PackageTags</span>&gt;</span>dotnet-new;templates;abp;domain-driven-design<span class="tag">&lt;/<span class="name">PackageTags</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">TargetFramework</span>&gt;</span>net5.0<span class="tag">&lt;/<span class="name">TargetFramework</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">IncludeContentInPack</span>&gt;</span>true<span class="tag">&lt;/<span class="name">IncludeContentInPack</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">IncludeBuildOutput</span>&gt;</span>false<span class="tag">&lt;/<span class="name">IncludeBuildOutput</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ContentTargetFolders</span>&gt;</span>content<span class="tag">&lt;/<span class="name">ContentTargetFolders</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NoWarn</span>&gt;</span>$(NoWarn);NU5128<span class="tag">&lt;/<span class="name">NoWarn</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PackageLicenseExpression</span>&gt;</span>MIT<span class="tag">&lt;/<span class="name">PackageLicenseExpression</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Copyright</span>&gt;</span>Copyright (c) 2021 Danvic Wang<span class="tag">&lt;/<span class="name">Copyright</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PackageIcon</span>&gt;</span>logo.png<span class="tag">&lt;/<span class="name">PackageIcon</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Product</span>&gt;</span>Ingos.Abp.Templates<span class="tag">&lt;/<span class="name">Product</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Company</span>&gt;</span>Danvic Wang<span class="tag">&lt;/<span class="name">Company</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">RepositoryUrl</span>&gt;</span>https://github.com/danvic712/ingos-abp-api-template<span class="tag">&lt;/<span class="name">RepositoryUrl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PackageProjectUrl</span>&gt;</span>https://github.com/danvic712/ingos-abp-api-template<span class="tag">&lt;/<span class="name">PackageProjectUrl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">RepositoryType</span>&gt;</span>git<span class="tag">&lt;/<span class="name">RepositoryType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">PropertyGroup</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">ItemGroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Content</span> <span class="attr">Include</span>=<span class="string">"templates\**\*"</span> <span class="attr">Exclude</span>=<span class="string">"templates\.vs\**;templates\**\Logs\**;templates\**\bin\**;templates\**\obj\**;"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Compile</span> <span class="attr">Remove</span>=<span class="string">"**\*"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ItemGroup</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">ItemGroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">None</span> <span class="attr">Include</span>=<span class="string">"resource\images\logo.png"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Pack</span>&gt;</span>True<span class="tag">&lt;/<span class="name">Pack</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">PackagePath</span>&gt;</span><span class="tag">&lt;/<span class="name">PackagePath</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">None</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ItemGroup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当配置定义完成之后，定位到 <code>Ingos.Abp.Templates.csproj</code> 所在的路径，执行 <code>dotnet pack -o .</code> 命令即可生成一个包含版本号的 <code>.nupkg</code> 文件，之后就可以将该文件上传到公有 or 私有的 nuget 仓库中供别人进行下载使用</p>
+<p>以我这里创建的项目为例，因为我已经上传到 nuget 官方仓库上了（非公司内部使用的版本），因此，你可以使用如下的命令进行安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet new -i Ingos.Abp.Templates</span><br></pre></td></tr></table></figure>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210317205550.png" alt="安装项目模板"></p>
+<p>安装完成后就可以通过 dotnet 命令进行项目的创建，在最新版的 VS 中，你也可以直接通过 IDE 来使用该模板进行项目的创建，相对来说也就更方便了，至此整个模板的精简的操作也就结束了，希望可以对你有所帮助</p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/simplify-abp-generated-template-structure/20210317205719.png" alt="通过 VS 创建项目"></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/abp/">abp</a>, <a class="has-link-grey -link" href="/tags/asp-net-core/">asp-net-core</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">码字不易,求支持~~~</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/alipay.JPG" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/wechat.JPG" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="98U55DZYZE454" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2021/01/31/use-cookie-authentication-in-asp-net-core/">
+                <span class="level-item">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: 'afc98711beb972f6c557',
+        clientSecret: '76ae9cc34495454189a80d2f48f1ffc35c2dd2a4',
+        id: '1569f746763153618da0c17a6d1dc724',
+        repo: 'lanesra712.github.io',
+        owner: 'Lanesra712',
+        admin: "Lanesra712",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/avatar.png" alt="墨墨墨墨小宇">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        墨墨墨墨小宇
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        .NET 程序员，枪手死忠
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>合肥, 安徽</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            57
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/danvic712" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/danvic712">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="博客园" href="https://www.cnblogs.com/danvic712/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="掘金" href="https://juejin.im/user/5bd93a936fb9a0224268c11b">
+                
+                <i class="far fa-gem"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Email" href="mailto:danvic96@hotmail.com">
+                
+                <i class="fa fa-envelope"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="http://feed.cnblogs.com/blog/u/404772/rss/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Overview">
+        <span class="has-mr-6">1</span>
+        <span>Overview</span>
+        </a></li><li>
+        <a class="is-flex" href="#Step-by-Step">
+        <span class="has-mr-6">2</span>
+        <span>Step by Step</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#运行模板项目">
+        <span class="has-mr-6">2.1</span>
+        <span>运行模板项目</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#调整数据库连接字符串">
+        <span class="has-mr-6">2.1.1</span>
+        <span>调整数据库连接字符串</span>
+        </a></li><li>
+        <a class="is-flex" href="#执行数据库迁移">
+        <span class="has-mr-6">2.1.2</span>
+        <span>执行数据库迁移</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行程序">
+        <span class="has-mr-6">2.1.3</span>
+        <span>运行程序</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#精简项目功能">
+        <span class="has-mr-6">2.2</span>
+        <span>精简项目功能</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#精简模板功能">
+        <span class="has-mr-6">2.2.1</span>
+        <span>精简模板功能</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#简化项目结构">
+        <span class="has-mr-6">2.3</span>
+        <span>简化项目结构</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#合并-EntityFramework-Core-相关功能类库">
+        <span class="has-mr-6">2.3.1</span>
+        <span>合并 EntityFramework Core 相关功能类库</span>
+        </a></li><li>
+        <a class="is-flex" href="#合并-API-宿主相关功能">
+        <span class="has-mr-6">2.3.2</span>
+        <span>合并 API 宿主相关功能</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#搭建项目脚手架">
+        <span class="has-mr-6">2.4</span>
+        <span>搭建项目脚手架</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/abp/">
+                        <span class="tag">abp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/angular/">
+                        <span class="tag">angular</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/asp-net-core/">
+                        <span class="tag">asp-net-core</span>
+                        <span class="tag is-grey">21</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/collections/">
+                        <span class="tag">collections</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/csharp/">
+                        <span class="tag">csharp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/devops/">
+                        <span class="tag">devops</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/domain-driven-design/">
+                        <span class="tag">domain-driven-design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/elastic-stack/">
+                        <span class="tag">elastic-stack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/feeling/">
+                        <span class="tag">feeling</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/planning/">
+                        <span class="tag">planning</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vue-js/">
+                        <span class="tag">vue-js</span>
+                        <span class="tag is-grey">20</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                码字不易
+            </h3>
+            <a target="_blank" href="https://url.cn/56I82Uq">
+                <img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/ads/tencent/gift-at-the-end%20-of-2019-year.jpg" title="【腾讯云·年末有礼】云产品限时秒杀，云服务器1核2G，首年128元">
+            </a>
+            <a target="_blank" href="https://cloud.tencent.com/redirect.php?redirect=1014&cps_key=e68037240aa92c0cfff6ee2ca9c51c5b&from=console">
+                <img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Ads/txcloud.jpg" title="云服务器、云数据库特惠，服务更稳，速度更快，价格更优">
+            </a>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- ads -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8337419994980497"
+                data-ad-slot="7298620842"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/03/13/simplify-abp-generated-template-structure/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png" alt="ABP 适用性改造 - 精简 ABP CLI 生成的项目结构">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-13T06:41:44.000Z">2021-03-13</time></div>
+                    <a href="/2021/03/13/simplify-abp-generated-template-structure/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ABP 适用性改造 - 精简 ABP CLI 生成的项目结构</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time></div>
+                    <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail4.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-17T02:48:49.000Z">2020-10-17</time></div>
+                    <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-02T02:48:49.000Z">2020-10-02</time></div>
+                    <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail5.jpg" alt="手摸手 Elastic Stack 使用教程 - 环境安装">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T03:48:49.000Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手摸手 Elastic Stack 使用教程 - 环境安装</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/excerpts/">
+            <span class="level-start">
+                <span class="level-item">excerpts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/learning/">
+            <span class="level-start">
+                <span class="level-item">learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">45</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mumble/">
+            <span class="level-start">
+                <span class="level-item">mumble</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/skills/">
+            <span class="level-start">
+                <span class="level-item">skills</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/03/13/simplify-abp-generated-template-structure/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail1.png" alt="ABP 适用性改造 - 精简 ABP CLI 生成的项目结构">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-13T06:41:44.000Z">2021-03-13</time></div>
+                    <a href="/2021/03/13/simplify-abp-generated-template-structure/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ABP 适用性改造 - 精简 ABP CLI 生成的项目结构</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail2.png" alt="在 ASP.NET Core 应用中使用 Cookie 进行身份认证">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-31T08:17:46.000Z">2021-01-31</time></div>
+                    <a href="/2021/01/31/use-cookie-authentication-in-asp-net-core/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 ASP.NET Core 应用中使用 Cookie 进行身份认证</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail4.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-17T02:48:49.000Z">2020-10-17</time></div>
+                    <a href="/2020/10/17/install-jenkins-and-sonarqube-on-windows-server/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - Jenkins &amp; SonarQube 安装配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-02T02:48:49.000Z">2020-10-02</time></div>
+                    <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail5.jpg" alt="手摸手 Elastic Stack 使用教程 - 环境安装">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T03:48:49.000Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/install-elastic-stack-on-centos-7/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手摸手 Elastic Stack 使用教程 - 环境安装</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/excerpts/">
+            <span class="level-start">
+                <span class="level-item">excerpts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/learning/">
+            <span class="level-start">
+                <span class="level-item">learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">45</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mumble/">
+            <span class="level-start">
+                <span class="level-item">mumble</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/skills/">
+            <span class="level-start">
+                <span class="level-item">skills</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.jpg" alt="ABP 适用性改造 - 精简 ABP CLI 生成的项目结构" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 - 2021 <br/>
+                Powered by <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                        墨墨墨墨小宇
+                        <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                Built by <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/danvic712">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://yuiter.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+<script src="/js/love.js"></script>
+<script type="text/javascript" src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
+<script>
+    (function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+    window.SeniverseWeatherWidget('show', {
+      flavor: "slim",
+      location: "WX4FBXXFKE4F",
+      geolocation: true,
+      language: "auto",
+      unit: "c",
+      theme: "light",
+      token: "ac57042f-0e76-4ad6-b274-2c5df9d97712",
+      hover: "enabled",
+      container: "tp-weather-widget"
+    })
+  </script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
