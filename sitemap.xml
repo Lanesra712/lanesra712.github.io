@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yuiter.com/2021/04/12/add-api-version-support-in-abp-framework/</loc>
+    
+    <lastmod>2021-04-12T14:09:00.560Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yuiter.com/2021/03/17/simplify-abp-generated-template-structure/</loc>
     
-    <lastmod>2021-03-17T13:37:51.791Z</lastmod>
+    <lastmod>2021-04-12T12:46:45.416Z</lastmod>
     
   </url>
   
@@ -23,6 +30,13 @@
   </url>
   
   <url>
+    <loc>https://yuiter.com/categories/index.html</loc>
+    
+    <lastmod>2020-11-21T06:37:40.044Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yuiter.com/about/index.html</loc>
     
     <lastmod>2020-11-21T06:37:40.044Z</lastmod>
@@ -31,13 +45,6 @@
   
   <url>
     <loc>https://yuiter.com/tags/index.html</loc>
-    
-    <lastmod>2020-11-21T06:37:40.044Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuiter.com/categories/index.html</loc>
     
     <lastmod>2020-11-21T06:37:40.044Z</lastmod>
     
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/</loc>
+    <loc>https://yuiter.com/2020/06/27/how-to-get-the-injected-services-in-startup-of-asp-net-core-3-x/</loc>
     
     <lastmod>2020-11-21T06:37:40.042Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuiter.com/2020/06/27/how-to-get-the-injected-services-in-startup-of-asp-net-core-3-x/</loc>
+    <loc>https://yuiter.com/2020/08/16/how-to-return-a-page-in-asp.net-core-middleware/</loc>
     
     <lastmod>2020-11-21T06:37:40.042Z</lastmod>
     
@@ -100,13 +107,6 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2020/02/13/getting-started-with-angular/</loc>
-    
-    <lastmod>2020-11-21T06:37:40.041Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://yuiter.com/2020/02/07/how-to-get-the-data-changed-properties-in-csharp-class/</loc>
     
     <lastmod>2020-11-21T06:37:40.041Z</lastmod>
@@ -114,9 +114,9 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2019/11/19/get-started-with-mediatr-in-asp-net-core/</loc>
+    <loc>https://yuiter.com/2020/02/13/getting-started-with-angular/</loc>
     
-    <lastmod>2020-11-21T06:37:40.040Z</lastmod>
+    <lastmod>2020-11-21T06:37:40.041Z</lastmod>
     
   </url>
   
@@ -129,6 +129,13 @@
   
   <url>
     <loc>https://yuiter.com/2020/06/02/getting-started-with-angular-route-guards/</loc>
+    
+    <lastmod>2020-11-21T06:37:40.040Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yuiter.com/2019/11/19/get-started-with-mediatr-in-asp-net-core/</loc>
     
     <lastmod>2020-11-21T06:37:40.040Z</lastmod>
     
@@ -149,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2020/10/02/build-a-devops-environment-for-the-dotnet-application/</loc>
+    <loc>https://yuiter.com/2020/07/19/deploy-angular-app-to-github-pages-with-github-actions/</loc>
     
     <lastmod>2020-11-21T06:37:40.039Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuiter.com/2020/07/19/deploy-angular-app-to-github-pages-with-github-actions/</loc>
+    <loc>https://yuiter.com/2020/10/02/build-a-devops-environment-for-the-dotnet-application/</loc>
     
     <lastmod>2020-11-21T06:37:40.039Z</lastmod>
     
@@ -184,14 +191,14 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2019/07/14/Vue-Chapter16/</loc>
+    <loc>https://yuiter.com/2018/08/27/Vue-Overview/</loc>
     
     <lastmod>2020-11-21T06:37:40.037Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuiter.com/2018/08/27/Vue-Overview/</loc>
+    <loc>https://yuiter.com/2019/07/14/Vue-Chapter16/</loc>
     
     <lastmod>2020-11-21T06:37:40.037Z</lastmod>
     
@@ -205,13 +212,6 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2019/07/02/Vue-Chapter14/</loc>
-    
-    <lastmod>2020-11-21T06:37:40.036Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://yuiter.com/2019/07/08/Vue-Chapter15/</loc>
     
     <lastmod>2020-11-21T06:37:40.036Z</lastmod>
@@ -219,7 +219,21 @@
   </url>
   
   <url>
+    <loc>https://yuiter.com/2019/07/02/Vue-Chapter14/</loc>
+    
+    <lastmod>2020-11-21T06:37:40.036Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yuiter.com/2019/03/31/Vue-Chapter10/</loc>
+    
+    <lastmod>2020-11-21T06:37:40.035Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yuiter.com/2019/05/21/Vue-Chapter12/</loc>
     
     <lastmod>2020-11-21T06:37:40.035Z</lastmod>
     
@@ -240,21 +254,7 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2019/05/21/Vue-Chapter12/</loc>
-    
-    <lastmod>2020-11-21T06:37:40.035Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://yuiter.com/2018/11/15/Vue-Chapter06/</loc>
-    
-    <lastmod>2020-11-21T06:37:40.034Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuiter.com/2018/12/12/Vue-Chapter07/</loc>
     
     <lastmod>2020-11-21T06:37:40.034Z</lastmod>
     
@@ -268,16 +268,16 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2019/03/09/Vue-Chapter09/</loc>
+    <loc>https://yuiter.com/2018/12/12/Vue-Chapter07/</loc>
     
     <lastmod>2020-11-21T06:37:40.034Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuiter.com/2018/08/28/Vue-Chapter02/</loc>
+    <loc>https://yuiter.com/2019/03/09/Vue-Chapter09/</loc>
     
-    <lastmod>2020-11-21T06:37:40.033Z</lastmod>
+    <lastmod>2020-11-21T06:37:40.034Z</lastmod>
     
   </url>
   
@@ -303,9 +303,9 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2018/07/14/July-One/</loc>
+    <loc>https://yuiter.com/2018/08/28/Vue-Chapter02/</loc>
     
-    <lastmod>2020-11-21T06:37:40.032Z</lastmod>
+    <lastmod>2020-11-21T06:37:40.033Z</lastmod>
     
   </url>
   
@@ -318,6 +318,13 @@
   
   <url>
     <loc>https://yuiter.com/2018/08/21/Talking-LaLa2/</loc>
+    
+    <lastmod>2020-11-21T06:37:40.032Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yuiter.com/2018/07/14/July-One/</loc>
     
     <lastmod>2020-11-21T06:37:40.032Z</lastmod>
     
@@ -338,14 +345,14 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2018/07/20/Graduation-Project/</loc>
+    <loc>https://yuiter.com/2018/07/25/Get-User/</loc>
     
     <lastmod>2020-11-21T06:37:40.031Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuiter.com/2018/07/25/Get-User/</loc>
+    <loc>https://yuiter.com/2018/07/20/Graduation-Project/</loc>
     
     <lastmod>2020-11-21T06:37:40.031Z</lastmod>
     
@@ -366,14 +373,14 @@
   </url>
   
   <url>
-    <loc>https://yuiter.com/2018/11/28/ASP-NET-Core-on-Linux-S02/</loc>
+    <loc>https://yuiter.com/2018/11/17/ASP-NET-Core-on-Linux-S01/</loc>
     
     <lastmod>2020-11-21T06:37:40.030Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuiter.com/2018/11/17/ASP-NET-Core-on-Linux-S01/</loc>
+    <loc>https://yuiter.com/2018/11/28/ASP-NET-Core-on-Linux-S02/</loc>
     
     <lastmod>2020-11-21T06:37:40.030Z</lastmod>
     
