@@ -162,6 +162,60 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-07-25T05:30:50.000Z">2018-07-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/learning/">learning</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1346 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                
+                <a class="has-link-black-ter" href="/2018/07/25/Get-User/">ASP.NET Core 2.0 MVC - 获取当前登录用户信息</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上篇实战完成后，没想到会有那么多的圈友给了那么多的支持，甚至连只是作为代码仓储的git上也给了一些小星星，真的感觉很惶恐啊，哈哈哈，毕竟代码写的很烂啊。由于上一篇只是大概说了下项目，所以准备写下这篇详细说下自己对于获取当前登录用户的设计与实现，原本准备上周末就完成的这篇，结果周六一起来，发现自己起水痘了，嗯，很悲催。。。请了一个星期的假，今天好歹头不痛，不发烧能看电脑了，就努力努力赶出来吧。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;获取当前登录用户的整体思路，我们可以通过创建一个静态的用户类，存储当前登录的用户。通过将属性值存储在session中，从而存储到服务器的内存中，做到可以在系统全局中获取当前登录用户的数据信息。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.NET Framework平台下面的MVC与.NET Core平台下面的MVC，对于Session的使用上存在着一些的差异，主要在于如何获取到Session对象。在传统的MVC项目中我们可以直接使用<span style="color:red">HttpContext.Current.Session</span>获取到session，从而做到对于数据的取值、赋值；而在ASP.NET Core MVC中，并没有HttpContext.Current.Session这个静态类，通过查阅微软的文档可知，我们可以通过注入<span style="color:red">IHttpContextAccessor</span>对象的方式从而获取到session对象，解决方案如下所示。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/07/25/Get-User/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-07-20T00:42:43.000Z">2018-07-20</time>
                 
                 <div class="level-item">
@@ -380,7 +434,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            58
+                            59
                         </p>
                     </a>
                 </div>
@@ -404,7 +458,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            13
+                            15
                         </p>
                     </a>
                 </div>
@@ -492,6 +546,13 @@ var _hmt = _hmt || [];
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/cloud-native/">
+                        <span class="tag">cloud-native</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/collections/">
                         <span class="tag">collections</span>
                         <span class="tag is-grey">1</span>
@@ -536,6 +597,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/github/">
                         <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kubernetes/">
+                        <span class="tag">kubernetes</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -601,6 +669,25 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/04/19/enable-k8s-in-docker-desktop/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="在 Docker Desktop 中启用 K8s 服务">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-19T12:31:53.000Z">2021-04-19</time></div>
+                    <a href="/2021/04/19/enable-k8s-in-docker-desktop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 Docker Desktop 中启用 K8s 服务</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -678,25 +765,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-02T02:48:49.000Z">2020-10-02</time></div>
-                    <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -738,7 +806,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">skills</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li>
             </ul>
@@ -760,7 +828,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">四月 2021</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1064,6 +1132,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/04/19/enable-k8s-in-docker-desktop/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="在 Docker Desktop 中启用 K8s 服务">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-19T12:31:53.000Z">2021-04-19</time></div>
+                    <a href="/2021/04/19/enable-k8s-in-docker-desktop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">在 Docker Desktop 中启用 K8s 服务</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2021/04/12/add-api-version-support-in-abp-framework/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail5.jpg" alt="ABP 适用性改造 - 添加 API 版本化支持">
@@ -1138,25 +1225,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png" alt="从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-02T02:48:49.000Z">2020-10-02</time></div>
-                    <a href="/2020/10/02/build-a-devops-environment-for-the-dotnet-application/" class="title has-link-black-ter is-size-6 has-text-weight-normal">从零开始针对 .NET 应用的 DevOps 运营实践 - 运行环境搭建</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/skills/">skills</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1198,7 +1266,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">skills</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li>
             </ul>
@@ -1220,7 +1288,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">四月 2021</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
