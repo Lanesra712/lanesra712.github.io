@@ -19,7 +19,7 @@
 <meta property="og:description" content="解决 docker desktop 启用 K8s 时卡死无法打开的问题，通过 docker desktop 搭建 K8s 环境">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Thumbnail/thumbnail3.png">
-<meta property="og:updated_time" content="2021-04-19T12:32:50.138Z">
+<meta property="og:updated_time" content="2021-04-19T12:35:31.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Docker Desktop 中启用 K8s 服务">
 <meta name="twitter:description" content="解决 docker desktop 启用 K8s 时卡死无法打开的问题，通过 docker desktop 搭建 K8s 环境">
@@ -182,7 +182,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1635 个字)
+                    11 分钟 读完 (大约 1639 个字)
                 </span>
                 
                 
@@ -222,19 +222,19 @@ var _hmt = _hmt || [];
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> RemoteSigned</span><br></pre></td></tr></table></figure>
 <p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210417170324.png" alt="修改 Powershell 策略"></p>
 <p>等待命令的执行完成，可以看到我们本地的 Docker 中已经包含了  <code>images.properties</code> 文件中列到的镜像</p>
-<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210417170602.png" alt="拉取进行"></p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210417170602.png" alt="拉取镜像"></p>
 <p>打开 Docker 的设置页面，找到 Kubernetes 页面，选中 Enable Kubernetes，然后点击 Apply &amp; Restart，这个执行过程有个一两分钟，稍等一会等待 K8s 的启动完成</p>
 <p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210417214209.png" alt="启用 K8s 服务"></p>
 <p>当左下角出现 K8s 的 logo，并逐步变为绿色，整个 K8s 的环境也就运行起来了，此时我们就可以通过 kubectl 来操作集群，可以看到这里已经可以打印出整个“集群”的信息</p>
-<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210417215135.png" alt="集群信息"></p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210417215135.png" alt="获取集群信息"></p>
 <h3 id="启用-Dashboard"><a href="#启用-Dashboard" class="headerlink" title="启用 Dashboard"></a>启用 Dashboard</h3><p>集群启动之后，虽然我们可以通过 kubectl 来操作集群，但是如果能够通过可视化页面的方式进行访问，则会更加便捷</p>
 <p>在上文 clone 下的 repo 中有个 <code>kubernetes-dashboard.yaml</code> 文件，你可以直接通过 kubectl apply 命令运行，然后启用代理进行访问</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-- 创建 dashboard 资源</span><br><span class="line">kubectl apply -f kubernetes-dashboard.yaml</span><br><span class="line"></span><br><span class="line">-- 查看 Deployment 的运行状态 </span><br><span class="line">kubectl get deployment -n kuberenetes-dashboard</span><br><span class="line"></span><br><span class="line">-- 查看 Pod 的运行状态</span><br><span class="line">kubectl get pods -n kuberenetes-dashboard</span><br><span class="line"></span><br><span class="line">-- 通过代理的方式访问 dashboard</span><br><span class="line">kubectl proxy</span><br></pre></td></tr></table></figure>
-<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210418102852.png" alt="安装 Dashboard"></p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210418102852.png" alt="启用 Dashboard"></p>
 <p>这里是使用 API Server 的形式访问的 dashboard ，具体的地址为：<a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/" target="_blank" rel="noopener">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</a></p>
 <p>我们可以使用下面的 powershell 命令打印出 token，然后登录到 dashboard 中查看整个集群的信息</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$TOKEN</span>=((kubectl -n kube-system describe secret default | <span class="built_in">Select-String</span> <span class="string">"token:"</span>) -split <span class="string">" +"</span>)[<span class="number">1</span>]</span><br><span class="line">kubectl config set-credentials docker-for-desktop --token=<span class="string">"$&#123;TOKEN&#125;"</span></span><br><span class="line">echo <span class="variable">$TOKEN</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210418103806.png" alt="集群 Dashboard"></p>
+<p><img src="https://lanesra-1255614120.cos.ap-shanghai.myqcloud.com/Blog/Post/enable-k8s-in-docker-desktop/20210418103806.png" alt="查看集群 Dashboard"></p>
 <p>当然，这里访问 dashboard 的方式不是最优解，后续每一次访问时，都需要执行 <code>kubectl proxy</code>，正常的做法应该是通过 <code>ingress</code> 进行代理访问。由于 K8s 我也是刚刚入门，对于 <code>ingress</code> 的使用没有过多的了解，所以这里留下一个 topic，后续再进行补充</p>
 
         </div>
